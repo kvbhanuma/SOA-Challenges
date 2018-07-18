@@ -1,0 +1,32 @@
+public class Contactscount 
+{
+
+  @future
+    public static void countContacts(List<String> id){
+    
+       List<Account> acclst = [select id,Number_of_Contacts__c , (select id from contacts ) from account where id in :id ];
+        
+       
+        for(Account a:acclst ){
+       List<contact> con = new List<contact>();
+       con = a.contacts;
+        
+        
+             
+        a.Number_of_Contacts__c=con.size();
+        
+        }
+        update acclst; 
+    }
+    
+    public static void getAcc(){
+    list<Account> accs = [select id from Account];
+
+    list<String> ids = new list<String>();
+    for(Account a:accs){
+    ids.add(a.id);
+    }
+        countContacts(ids);
+    }
+}
+

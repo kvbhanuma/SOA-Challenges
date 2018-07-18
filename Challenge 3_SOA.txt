@@ -1,0 +1,14 @@
+@RestResource(urlMapping='/report/')
+global with sharing class ReportRESTService {
+  @HttpGet
+  global static void ProjectData(){
+			HTTPRequest req = new HTTPRequest();
+            req.setEndPoint('https://postman-echo.com/get?foo1=bar1&foo2=bar2');
+            req.setMethod('GET');
+            req.setHeader('Content-Type', 'application/json');        
+            HTTP http = new HTTP();
+            HTTPResponse res = http.send(req);
+            system.debug('response'+res.getBody());
+                               
+  }
+}
